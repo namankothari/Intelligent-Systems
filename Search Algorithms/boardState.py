@@ -126,7 +126,6 @@ class Node:
         return nextBoard
 
     def getBlankIndex(self):
-
         for i in range(len(self.board)):
             for j in range(len(self.board)):
                 if self.board[i][j] == 0:

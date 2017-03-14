@@ -4,7 +4,22 @@ from nPuzzle.boardState import Node
 import heapq
 import time
 
+__author__ = 'Naman Kothari'
+"""
+Author: Naman Kothari(namankothari25@gmail.com)
+
+This program implements different search algorithms
+to solve n-puzzle problem.
+"""
+
+
 def getStartBoard(configString):
+    """
+    Generates a matrix to store the configuration
+    of the board
+    :param configString: Board configuration in string format
+    :return: Board configuration in a matrix
+    """
 
     elements = configString.split(',')
 
@@ -23,7 +38,11 @@ def getStartBoard(configString):
     return board, boardSize
 
 def getEndBoard(boardSize):
+    """
 
+    :param boardSize: size of the board (n)
+    :return: goal configuration in matrix
+    """
     board = []
     index = 0
 
@@ -37,7 +56,12 @@ def getEndBoard(boardSize):
     return board
 
 def performBFS(startState, endState):
-
+    """
+    Finds a solution if any, by applying Breadth-first Search technique
+    :param startState: start configuration of the board
+    :param endState: end configuration of the board
+    :return: boolean representing if the solution is found
+    """
     frontier = [startState]
     frontierSet = set()
     visited = set()
@@ -85,6 +109,12 @@ def performBFS(startState, endState):
     return False
 
 def performDFS(startState, endState):
+    """
+    Finds a solution by applying Depth-first Search technique
+    :param startState: start configuration of the board
+    :param endState: end configuration of the board
+    :return: boolean representing if the solution is found
+    """
 
     frontier = [startState]
 
@@ -135,7 +165,12 @@ def performDFS(startState, endState):
     return False
 
 def performAstar(startState, endState):
-
+    """
+    Finds a solution if any, by applying A* Search technique
+    :param startState: start configuration of the board
+    :param endState: end configuration of the board
+    :return: boolean representing if the solution is found
+    """
     frontier = []
     heapq.heappush(frontier, startState)
     startState.calculateHeuristic()
@@ -189,7 +224,12 @@ def performAstar(startState, endState):
     return False
 
 def performIDAstar(startState, endState):
-
+    """
+    Finds a solution by applying IDA* Search technique
+    :param startState: start configuration of the board
+    :param endState: end configuration of the board
+    :return: boolean representing if the solution is found
+    """
     nodesExpanded = 0
     maxFringe = 1
     maxDepth = 0
@@ -256,6 +296,11 @@ def performIDAstar(startState, endState):
     return False
 
 def getPath(currentState):
+    """
+    Find path from start state to current state
+    :param currentState: state for which path is to be found
+    :return: Path to reach from the start state to current state
+    """
     path = []
     parentState = currentState.parent
     while parentState is not None:
@@ -266,6 +311,12 @@ def getPath(currentState):
     return path
 
 def getStep(parentState, currentState):
+    """
+    Determines action required to reach from parent to child state
+    :param parentState: Parent of the current state
+    :param currentState: Child of the parent state
+    :return: Action('Up', 'Down, 'Left', 'Right') required to reach from parent to child state
+    """
     iParent, jParent = -1, -1
     iCurrent, jCurrent = -1, -1
 
@@ -295,7 +346,12 @@ def getStep(parentState, currentState):
             return 'Down'
 
 def isGoal(currentBoard, endBoard):
-
+    """
+    checks if current state is the end state
+    :param currentBoard: board configuration of current state
+    :param endBoard: board configuration of end state
+    :return: boolean to represent if current state is goal state
+    """
     for i in range(len(currentBoard)):
         for j in range(len(currentBoard)):
             if currentBoard[i][j] != endBoard[i][j]:
@@ -303,7 +359,10 @@ def isGoal(currentBoard, endBoard):
     return True
 
 def main():
-
+    """
+    Takes input board configuration and search algorithm to find the path
+    :return: None
+    """
     method, configString = sys.argv[1:]
 
     startBoard, boardSize = getStartBoard(configString)

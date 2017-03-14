@@ -236,7 +236,7 @@ def performIDAstar(startState, endState):
 
     startState.calculateHeuristic()
     costLimit = startState.h * 0.1
-    delta = startState.h * 0.05
+    delta = startState.h * 0.1
     costBound = startState.h * 5
 
     while costLimit < costBound:

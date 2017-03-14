@@ -39,7 +39,6 @@ class Node:
         return self.board
 
     def getNeighbours(self):
-
         iBlank, jBlank = self.getBlankIndex()
 
         upNeighbour = self.getUpNeighbour(iBlank, jBlank)
@@ -130,3 +129,5 @@ class Node:
             for j in range(len(self.board)):
                 if self.board[i][j] == 0:
                     return i, j
+                
+                
